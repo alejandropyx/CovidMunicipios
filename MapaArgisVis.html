@@ -1,0 +1,258 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <!--
+  ArcGIS API for JavaScript, https://js.arcgis.com
+  For more information about the webmap-basic sample, read the original sample description at developers.arcgis.com.
+  https://developers.arcgis.com/javascript/latest/sample-code/webmap-basic/index.html
+  -->
+<title>Load a basic WebMap | Sample | ArcGIS API for JavaScript 4.16</title>
+
+    <link rel="stylesheet" href="css/style.css">
+ 
+    <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      
+
+    <script src="https://js.arcgis.com/4.16/"></script>
+
+  </head>
+
+  <body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    -->  
+
+  <script src="js/mapa.js"></script>
+
+  
+    <div class="container-fluid">
+        <div class="row justify-content-center" style="padding-top: 50px;">
+          <div class="col-3 text-right">
+            <div id="lineRight"></div>
+          </div>
+            <div class="col-6 text-center">
+                <h1>Análisis de la pandemia en base de la conectivdad entre municipios</h1>
+            </div>
+            <div class="col-3 text-left">
+              <div id="lineLeft"></div>              
+          </div>
+
+            <div class="col-3" style="padding-top: 20px;">
+                <p>
+                    
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2"  onclick="hideSection(1)">
+                      Conexiones por funcionalidades
+                      </a>
+                  </p>
+                </div>
+
+                <div class="col-3" style="padding-top: 20px;">
+                  <p>
+                    
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3"  onclick="hideSection(2)">
+                      Estado de la pandemia y Clusters por municipio
+                      </a>
+                  </p>
+                </div>
+
+                <div class="col-3" style="padding-top: 20px;">
+                  <p>
+                    
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4"  onclick="hideSection(3)">
+                      Evolución del cierre y re-apertura de actividades
+                      </a>
+                  </p>
+            </div>   
+        </div>    
+     
+
+        <div class="row justify-content-center "  id="collapseExample2" style="padding-top: 50px;">
+          <div class="col-4 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-4 text-center">
+                <h3>Conexiones por funcionalidades</h3>
+            </div>
+            <div class="col-4 text-right">
+              <div id="lineLeft"></div>
+            </div>
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px;">
+                <!--<iframe width="100%" height="500px" class="collapse" id="collapseExample2" src="MapaArgisVis.html"></iframe>    -->
+
+                <div class="card " style=" float:left" aling="justify">   
+                    <p class="Descrip" >
+                      Con el propósito de proveer información e instrumentos para la toma de decisiones en el manejo y coyuntura de la pandemia Covid-19, los gobiernos locales pueden consultar en este tablero de control el estado de la pandemia de su municipio y el de aquellos con los que tienen <span style="color:rgb(233, 113, 15); font-weight: bold;">conexiones</span>. 
+                    </p>
+
+                    <ul>
+                      <li>Conexiones por funcionalidades.</li>
+                      <li>Muestran la relación que existen entre los municipios como el flujo de personas que:</li>
+                      <ol>
+                        <li>Asiste a servicios de salud.</li>
+                        <li>Asiste a servicios de educación.</li>
+                        <li>Conmuta por su trabajo.</li>
+                      </ol>
+                      <li>Conexiones vía aérea muestra la relación que tienen los municipios con base a la intensidad de personas que transportan.</li>
+                      <li>Con el mapa a continuación podrá identificar los municipios con los que tiene relación, y, la intensidad de la misma.</li>
+
+
+                    </ul>
+                
+                </div>
+            </div>  
+            <div class="col-8 col-md-8 col-sm-8 col-lg-8 " style="padding-top: 100px; height: 800px;">
+              <div class="modal show-modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <img src="img/tenor.gif" width="100%" height="90%">
+                </div>
+              </div>
+            
+                  <fieldset style="padding-bottom: 24px;">
+                    <!--<label for="rangeVal">resolution (dpi):</label>-->
+                   
+                    <select id="Departamento-dropdown" name="Departamento">
+                    </select>
+            
+                    <select id="locality-dropdown" name="locality" disabled="true">
+                    </select>
+
+                    <select id="tipoViaje-dropdown" name="tipoViaje" >
+                      <option selected="true" value=0 disabled>Tipo de Viaje</option>
+                      <option value="Salud">Salud</option>
+                      <option value="Trabajo">Trabajo</option>
+                      <option value="Educacion">Educacion</option>
+                      <option value="Total">Total Terrestre</option>
+                      <option value="Vuelos">Datos de Vuelo</option>
+                      <option value="TTotal">Total Viajes</option>
+                    </select>
+
+                    <input id="pconexion" type ="range" max="100" min="0"
+                        oninput="document.getElementById('rangeValLabel').innerHTML = this.value;"
+                        step="10" name="rangeVal" id="rangeVal" value="0">
+                    </input>
+
+                    <h4 style="display: inline;">
+                      <em id="rangeValLabel" style="font-style: normal;">0</em> %
+                    </h4>
+                    <button id="graficar" type="button" class="btn btn-outline-success btn-lg" disabled="true">Graficar</button>
+            
+                    <em id="Mostrando" style="font-style: normal;"></em>
+            
+                  </fieldset>
+            
+                  <div id="viewDiv" style="padding-bottom: 100px;"></div>
+            
+            
+                <span id="info" style="position:absolute; left:15px; bottom:5px; color:#000; z-index:50;"></span>
+            
+            
+              </div>  
+
+              <div class="col-8 col-md-8 col-sm-8 col-lg-8 "  id="tableDiv"  id="collapseExample2" style="padding-top: 20px; padding-bottom:100px ;   display: none;">
+                <div id="showData">
+
+
+                </div>
+              
+              </div>
+        </div>
+        
+
+        <div class="row justify-content-center" id="collapseExample3" style="padding-top: 20px;">
+          <div class="col-4 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-4 text-center">
+                <h3>Estado de la pandemia y Clusters por municipio</h3>
+            </div>
+            <div class="col-4 text-right">
+              <div id="lineLeft"></div>
+            </div>
+
+
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px; padding-bottom: 100px;">
+                <!--<iframe width="100%" height="500px" class="collapse" id="collapseExample2" src="MapaArgisVis.html"></iframe>    -->
+
+                <div class="card " style=" float:left" aling="justify">   
+                    <p class="Descrip" >
+                      En primer lugar, el municipio podrá conocer la evolución del contagio en su entidad territorial respecto al periodo de inicio, entre otras variables de interés; así como un ejercicio de referenciación para indagar cuál es el estado de la pandemia en municipios <span style="color:rgb(233, 113, 15); font-weight: bold;">pares</span>. Con esta información se espera pueda establecer municipios aliados para el manejo de la pandemia en términos de salud y la reactivación económica, y contrastarlo con la capacidad hospitalaria del municipio y la región.
+                    </p>
+
+                    <ul>
+                      <li>El contenido debería visualizar la evolución de la pandemia en el municipio.</li>
+                      <li>Referenciar el estado del municipio frente a pares.</li>                      
+                      <li>Visibilizar los municipios con los que tiene relación y clúster respectivo.</li>
+                   
+
+                    </ul>
+                
+                </div>
+            </div>  
+            <div class="col-8" style="padding-top: 70;padding-bottom: 100px;">
+              <iframe width="100%" height="800px" src="https://app.powerbi.com/view?r=eyJrIjoiOTYwZDUwZjAtNWU3YS00YmI2LWI0MWYtMzk5ZjJkZTViZTExIiwidCI6IjYxOGJhYjBmLTIwYTQtNGRlMy1hMTBjLWUyMGNlZTk2YmIzNSIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>   
+            </div>
+            
+        </div>
+
+        <div class="row justify-content-center" id="collapseExample4" style="padding-top: 20px;">
+          <div class="col-4 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-4 text-center">
+                <h3>Evolución del cierre y re-apertura de actividades</h3>
+            </div>
+            <div class="col-4 text-right">
+              <div id="lineLeft"></div>
+            </div>
+
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px; padding-bottom: 100px;">
+              <!--<iframe width="100%" height="500px" class="collapse" id="collapseExample2" src="MapaArgisVis.html"></iframe>    -->
+
+              <div class="card " style=" float:left" aling="justify">   
+                  <p class="Descrip" >
+                    En segundo lugar, como insumo para la administración el municipio puede consultar la evolución del cierre y re-apertura de actividades económicas para el país en términos de <span style="color:rgb(233, 113, 15); font-weight: bold;">trabajo</span>, para las principales ciudades, zonas rurales y urbanas. Esta información se actualizará en la medida que esté disponible en el Departamento Administrativo Nacional de Estadística (DANE).</p>
+
+                  <ul>
+                    <li>Conocer la dinámica laboral y económica del país permite conocer la velocidad de reactivación que ha tenido el país y las entidades territoriales.</li>
+                    <li>Consultar recomendaciones sectoriales según el CONPES.</li>                      
+                    
+                 
+
+                  </ul>
+              
+              </div>
+          </div>  
+
+          <div class="col-8" style="padding-top: 70;padding-bottom: 100px;">
+              <iframe width="100%" height="500px" src="https://app.powerbi.com/reportEmbed?reportId=db346395-e42b-41a0-b6b6-1583fd0ace81&autoAuth=true&ctid=04260e20-234c-4c9f-a9dd-79286b1b70ac&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
+                  
+          </div>
+          
+      </div>
+
+
+        
+    </div>
+
+
+
+
+    
+  </body>
+</html>
