@@ -1,0 +1,198 @@
+
+  html,
+  body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f1f1f1;
+  }
+  #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 90%;
+    width: 90%;
+  }
+
+  html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+        body{
+            background-color: #f1f1f1f1;
+        }
+
+        .row{
+            background-color: #fff;
+            margin: 50px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        .card{
+            background-color: #fff;
+            margin-top: 20%;
+            margin-right: 3%;
+            padding-right: 16px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+
+
+select{
+width: 300px;
+height: 50px;
+padding: 5px;
+
+cursor: pointer;
+
+}
+
+#pconexion{
+
+    width: 200px;
+
+    cursor: pointer;
+
+
+}
+
+option {
+    
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 50;
+  }
+
+
+
+.Descrip{
+    margin: 5%;
+    font-size: larger;
+}
+
+
+  .modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0.5rem;
+}
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+.close-button:hover {
+    background-color: darkgray;
+}
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 10;
+}
+
+.container-fluid{
+
+  margin: 10%;
+
+}
+
+#tableDataFilter {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #tableDataFilter td, #tableDataFilter th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #tableDataFilter tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #tableDataFilter tr:hover {background-color: #ddd;}
+  
+  #tableDataFilter th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(233, 113, 15);
+    color: white;
+  }
+
+  .subData{
+      color: #5c5c5c;
+  }
+
+  .DataMainNode{
+    align-content: center;
+    text-align: center;
+  }
+
+  #Descrip{
+text-align: justify;
+
+  }
+
+  #lineLeft {
+    position: absolute;
+    background-image: url(../img/text_line.png);
+    background-repeat: repeat-x;
+    background-size: 100% 100%;
+    height: 5px;
+    width: 100px;
+    top: 30px;
+    left: 0px;
+    content: ' ';
+}
+
+#lineRight {
+  position: absolute;
+  background-image: url(../img/text_line.png);
+  background-repeat: repeat-x;
+  background-size: 100% 100%;
+  height: 5px;
+  width: 100px;
+  top: 30px;
+  right: 0px;;
+  content: ' ';
+}
+li{
+  font-size: large;
+  padding-top: 8px;
+}
+
