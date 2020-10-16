@@ -127,11 +127,14 @@ option {
 
 .container-fluid{
 
+    width: 90% !important;
   margin: 5%;
-  margin-left: 10%;
-  margin-right: 10%;
-  
+  background-color: #f1f1f1;
 
+
+}
+body{
+  background-color: #f1f1f1 !important;
 }
 
 #tableDataFilter {
