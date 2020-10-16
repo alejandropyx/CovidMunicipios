@@ -12,7 +12,7 @@
   For more information about the webmap-basic sample, read the original sample description at developers.arcgis.com.
   https://developers.arcgis.com/javascript/latest/sample-code/webmap-basic/index.html
   -->
-<title>Hands on Data | Covid Municipios</title>
+<title>Load a basic WebMap | Sample | ArcGIS API for JavaScript 4.16</title>
 
     <link rel="stylesheet" href="css/style.css">
  
@@ -42,13 +42,30 @@
   
     <div class="container-fluid">
         <div class="row justify-content-center" style="padding-top: 50px;">
-          <div class="col-3 text-right">
+          <div class="col-1 text-right">
             <div id="lineRight"></div>
           </div>
-            <div class="col-6 text-center">
-                <h1>Análisis de la pandemia en base de la conectivdad entre municipios</h1>
-            </div>
             <div class="col-3 text-left">
+              
+              <img src="./img/coronavirus.png" width="50%"  style="display: inline-block;">
+            </div>
+            <div class="col-4 text-center" style="display: flex; align-items: center; justify-content: center;">
+              
+              <h1  style="display: inline-block;  ">Hands-On Data Analytics</h1>
+            </div>
+            <div class="col-3 text-right">
+              
+              <img src="./img/LogoJave.png" width="20%"  style="display: inline-block;">
+              <img src="./img/0.png" width="25%"  style="display: inline-block;">
+              <img src="./img/caf.png" width="20%"  style="display: inline-block;">
+              <img src="./img/DNP.png" width="30%"  style="display: inline-block;">
+
+              </div>
+                
+            
+
+
+            <div class="col-1 text-left">
               <div id="lineLeft"></div>              
           </div>
 
@@ -115,7 +132,7 @@
                 
                 </div>
             </div>  
-            <div class="col-8 col-md-8 col-sm-8 col-lg-8 " style="padding-top: 100px; height: 800px;">
+            <div class="col-8 col-md-8 col-sm-8 col-lg-8 " style="padding-top: 100px; height: 950px;">
               <div class="modal show-modal" style="display:none;">
                 <div class="modal-content">
                     <span class="close-button">&times;</span>
@@ -141,7 +158,9 @@
                       <option value="Vuelos">Datos de Vuelo</option>
                       <option value="TTotal">Total Viajes</option>
                     </select>
-                <div style="display: inline-block;">
+
+                    <div style="display: inline-block;">
+
                     <input id="pconexion" type ="range" max="100" min="0"
                         oninput="document.getElementById('rangeValLabel').innerHTML = this.value;"
                         step="10" name="rangeVal" id="rangeVal" value="0">
@@ -150,7 +169,7 @@
                     <h4 style="display: inline;">
                       <em id="rangeValLabel" style="font-style: normal;">0</em> %
                     </h4>
-                 </div>
+                  </div>
                     <button id="graficar" type="button" class="btn btn-outline-success btn-lg" disabled="true">Graficar</button>
             
                     <em id="Mostrando" style="font-style: normal;"></em>
