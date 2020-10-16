@@ -141,7 +141,7 @@
                       <option value="Vuelos">Datos de Vuelo</option>
                       <option value="TTotal">Total Viajes</option>
                     </select>
-
+                <div style="display: inline-block;">
                     <input id="pconexion" type ="range" max="100" min="0"
                         oninput="document.getElementById('rangeValLabel').innerHTML = this.value;"
                         step="10" name="rangeVal" id="rangeVal" value="0">
@@ -150,6 +150,7 @@
                     <h4 style="display: inline;">
                       <em id="rangeValLabel" style="font-style: normal;">0</em> %
                     </h4>
+                 </div>
                     <button id="graficar" type="button" class="btn btn-outline-success btn-lg" disabled="true">Graficar</button>
             
                     <em id="Mostrando" style="font-style: normal;"></em>
