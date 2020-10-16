@@ -169,7 +169,7 @@ var  a=  require(["esri/views/MapView", "esri/WebMap", "esri/geometry/Point", "e
       };
 
       // Set the center and zoom level on the view
-      view.center = [-74.0721, 4.7110];  // Sets the center point of the view at a specified lon/lat
+      view.center = [-73.6285, 4.1492];  // Sets the center point of the view at a specified lon/lat
       view.zoom = 5;  // Sets the zoom LOD to 13
       
       // Set the extent on the view
@@ -209,6 +209,7 @@ var  a=  require(["esri/views/MapView", "esri/WebMap", "esri/geometry/Point", "e
           console.log(tipoViaje)
 
           var origen = findLonLat( document.getElementById("locality-dropdown").value)
+          var origenActual = findNode(document.getElementById("locality-dropdown").value)
           Nodes.push(findNode(document.getElementById("locality-dropdown").value))
           var maxConnection = edgesToShow[0][tipoViaje]
 
@@ -256,8 +257,20 @@ var  a=  require(["esri/views/MapView", "esri/WebMap", "esri/geometry/Point", "e
             };
 
             var lineAtt = {            
-            "msg": "El flujo de personas  a "+destinoActual["Municipio"]+" es: "  +  obj[tipoViaje]       
+            "msg": "El "+ Math.round((obj[tipoViaje]/obj["Total"])*10000)/100 +"% se los viajes totales terrestres entre "+origenActual["Municipio"]+" y "+destinoActual["Municipio"]+" son por motivos de "  +  tipoViaje +"."
             };
+
+            if (tipoViaje == "Vuelos")
+
+            lineAtt = {             
+              "msg": "El flujo entre "+origenActual["Municipio"]+" y "+destinoActual["Municipio"]+" mediante viajes aéreos es de aproximadamente"+ obj[tipoViaje]+" personas al mes."
+              };
+
+            if (tipoViaje == "Totales")
+
+            lineAtt = {            
+              "msg": "El flujo de "+origenActual["Municipio"]+" a "+destinoActual["Municipio"]+" por viajes terrestres representa el "+ Math.round((obj[tipoViaje]/obj["TTotal"])*10000)/100 +"% de los viajes Totales."
+              };
 
             
             Edges.push(new Graphic({
@@ -456,7 +469,10 @@ var  a=  require(["esri/views/MapView", "esri/WebMap", "esri/geometry/Point", "e
             document.getElementById("tableDiv").style.display = "block";
             view.graphics.removeMany(Edges); 
             view.graphics.removeMany([Edges]); 
-            view.graphics.removeAll()             
+            view.graphics.removeAll()     
+            
+            view.center = findLonLat(document.getElementById("locality-dropdown").value);  // Sets the center point of the view at a specified lon/lat
+            view.zoom = 6;
             
             
             edgesToShow = findNodes(edges, document.getElementById("locality-dropdown").value)
