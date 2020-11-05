@@ -77,10 +77,6 @@ option {
 
 
 
-.Descrip{
-    margin: 5%;
-    font-size: larger;
-}
 
 
   .modal {
@@ -198,7 +194,105 @@ text-align: justify;
   content: ' ';
 }
 li{
-  font-size: large;
+  font-size: medium;
   padding-top: 8px;
 }
+.Descrip{
+  margin: 5%;
+  font-size: medium;
+}
 
+p {
+  text-align: justify;
+  margin: 5%;
+  font-size: medium;
+}
+
+select{
+  background-color: rgba(250, 233, 159, 0.623);
+}
+
+.graficar{
+
+background-color: burlywood !important;
+
+}
+
+.btnNav{
+
+  width: 250px;
+  height: 80px;
+  cursor: pointer;
+
+
+
+  
+  
+  background-color: rgba(250, 233, 159, 0.849) !important;
+  text-align: center !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  margin: 8px;
+  -webkit-animation: all 3s;
+   -moz-animation: all 3s;
+     -o-animation: all 3s;
+        animation: all 3s;
+}
+
+.btnNav:hover{
+
+ 
+  width: 270px;
+  height: 85px;
+  border-radius: 30px;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
+.sectionBtn{
+  padding-bottom: 50px;
+}
+
+.textBtn{
+
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnGraf{
+
+  width:150px;
+  height: 80px;
+  cursor: pointer;
+  font-weight: bold !important;
+
+
+  
+  
+  background-color: rgb(250, 233, 159) !important;
+  text-align: center !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  margin: 8px;
+  -webkit-animation: all 3s;
+   -moz-animation: all 3s;
+     -o-animation: all 3s;
+        animation: all 3s;
+}
+
+.btnGraf:hover{
+font-weight: bolder !important;
+color: darkgreen !important;
+
+}
+
+h7{
+  padding-right: 50px;
+  font-weight: bolder;
+  font-size: smaller;
+
+}
