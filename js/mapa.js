@@ -28,7 +28,7 @@ $(document).ready(function() {
 
    $.ajax({
       type: "GET",
-      url: "ConFuncionT.json",
+      url: "ConFuncionT2.json",
       dataType: "text",
       success: function(data) {ConFuncion = JSON.parse(data);}
    });
@@ -403,8 +403,13 @@ var  a=  require(["esri/views/MapView", "esri/WebMap", "esri/geometry/Point", "e
 
         var table = document.createElement("table");
         table.id="tableDataFilter"
+        
         //var txt = "<tr> <th>Destino</th><th>Viajes por salud</th><th>Viajes por Trabajo</th><th>Viajes por Educación</th><th>Viajes Totales Terrestres</th><th>Viajes Aereos</th><th>Viajes  Totales</th> <th>Casos Confirmados</th><th>Casos Existentes</th><th>Casos Recuperados</th><th>Muertes</th>  </tr>"
-        var txt = "<tr> <th>Destino</th><th>Viajes por salud</th><th>Viajes por Trabajo</th><th>Viajes por Educación</th><th>Viajes Totales Terrestres</th><th>Viajes Aereos</th><th>Viajes  Totales</th></tr>"
+        var txt=""
+
+        txt += "<col class=\"col1\"/> <col class=\"col2\"/> <col class=\"col3\"/> <col class=\"col4\"/> <col class=\"col5\"/> <col class=\"col6\"/> <col class=\"col7\"/>"
+        
+        txt += "<tr> <th>Destino</th><th>Viajes por salud</th><th>Viajes por Trabajo</th><th>Viajes por Educación</th><th>Viajes Totales por Funcionalidad</th><th class=\"colVuelo\">Viajes Aereos</th><th>Indice de Conectividad</th></tr>"
         
         table.innerHTML = txt;
 
@@ -427,7 +432,9 @@ var  a=  require(["esri/views/MapView", "esri/WebMap", "esri/geometry/Point", "e
 
           var datacovid_actua = dataCovid(obj.Id_Destino)
 
-          txt += "<tr> <td>"+destinoActual["Municipio"]+"</td><td>"+obj["Salud"]+"</td><td>"+obj["Trabajo"]+"</td> <td>"+obj["Educacion"]+"</td><td>"+obj["Total"]+"</td><td>"+obj["Vuelos"]+"</td><td>"+obj["TTotal"]+"</td>  </tr>"
+          var indiceC =obj["TTotal"].toFixed(4);
+
+          txt += "<tr> <td style= \"width:200px\">"+destinoActual["Municipio"]+"</td><td>"+obj["Salud"]+"</td><td>"+obj["Trabajo"]+"</td> <td>"+obj["Educacion"]+"</td><td>"+obj["Total"]+"</td><td class=\"colVuelo\">"+obj["Vuelos"]+"</td><td>"+indiceC+"</td>  </tr>"
           datacovid_actua["Confirmados"]
         }
 
@@ -436,6 +443,27 @@ var  a=  require(["esri/views/MapView", "esri/WebMap", "esri/geometry/Point", "e
         var divContainer = document.getElementById("showData");
         
         divContainer.appendChild(table);
+
+        
+        var tipoViaje = document.getElementById("tipoViaje-dropdown").value
+
+        if ( tipoViaje!= "Vuelos") {
+          
+          var elements = document.querySelectorAll('.colVuelo');
+          for(var i=0; i<elements.length; i++){
+              elements[i].style.display="none"
+          }
+
+
+        }
+        else{
+          var elements = document.querySelectorAll('.colVuelo');
+          for(var i=0; i<elements.length; i++){
+              elements[i].style.display="block"
+          }
+        }
+
+        
 
       }
 
