@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <!--
+  ArcGIS API for JavaScript, https://js.arcgis.com
+  For more information about the webmap-basic sample, read the original sample description at developers.arcgis.com.
+  https://developers.arcgis.com/javascript/latest/sample-code/webmap-basic/index.html
+  -->
+<title>Hands-On Data| Covid Municipios</title>
+
+    <link rel="stylesheet" href="css/style.css">
+ 
+    <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      
+
+    <script src="https://js.arcgis.com/4.16/"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/gov.css">
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+  </head>
+
+  <body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <!--
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    -->  
+
+  <script src="js/mapa.js"></script>
+
+  <header class="gov_header"> <!-- GOV HEADER -->
+    <div class="gov_header_logo">
+      <a href="https://www.gov.co">
+        <img src="img//header/gov_logo.png" alt="logo">
+      </a>
+    </div>
+    <div class="gov_header_container">
+      <div class="gov_header_message">
+        <span class="gov_header_active_msg_1">El Estado no tiene porqué ser aburrido ¡conoce a gov.co!</span>
+        <span class="gov_header_active_msg_2">¿Sabes que es GOV.CO? Conócelo aquí</span>
+        <span class="gov_header_active_msg_3">¿Sabes que es GOV.CO?</span>
+      </div>
+      <div class="gov_header_options">
+        <ul class="gov_header_nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="https://www.gov.co/tramites-y-servicios" target="_blank">Trámites y servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.gov.co/participacion" target="_blank">Participación</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.gov.co/informacion" target="_blank">Entidades</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-fluid" style="margin-bottom: 0; margin-top: 0;">
+    <div class="row" style="background: transparent; box-shadow: none;">
+      <div class="col-4 d-flex d-flex align-items-center" style="height: 100px;">
+        <img src="img/header/DNP-logo.png" class="img-fluid ">
+      </div>
+      <div class="col-1 d-flex d-flex align-items-center" style="height: 100px;">
+        <img src="img/LogoJave.png" class="img-fluid " style="max-height: 80px;">
+      </div>
+      <div class="col-1 d-flex d-flex align-items-center" style="height: 100px;">
+        <img src="img/0.png" class="img-fluid " style="max-height: 80px;">
+      </div>
+      <div class="col-1 d-flex d-flex align-items-center" style="height: 100px;">
+        <img src="img/caf.png" class="img-fluid " style="max-height: 50px;">
+      </div>
+    </div>
+  </div>
+  
+    <div class="container-fluid">
+        <div class="row justify-content-center" style="padding-top: 50px;">
+          <div class="col-1 text-right">
+            <div id="lineRight"></div>
+          </div>
+            <div class="col-3 text-left" style="display: flex; align-items: center; justify-content: center;">
+              
+              <img src="./img/coronavirus.png" width="30%" style="display: inline-block;">
+<img src="https://www.dnp.gov.co/estilos/images/logoNuevo.jpg" width="69%" style="display: inline-block;">
+            </div>
+            <div class="col-4 text-center" style="display: flex; align-items: center; justify-content: center;">
+              
+              <h1  style="display: inline-block;  ">Hands-On Data Analytics</h1>
+            </div>
+            <div class="col-3 text-right">
+              
+              <img src="./img/LogoJave.png" width="30%" style="display: inline-block;">
+              <img src="./img/0.png" width="35%" style="display: inline-block;">
+              <img src="./img/caf.png" width="30%" style="display: inline-block;">
+              
+
+              </div>
+
+            <div class="col-1 text-left">
+              <div id="lineLeft"></div>              
+            </div>
+              <div class="col-12">
+
+                <p>                  
+                  Este tablero de control fue construido con el propósito de orientar a los tomadores de decisión e informar a la ciudadanía respecto a elementos de interés para el manejo de la pandemia Covid-19 para los municipios del país. Para cada entidad territorial puede conocer las principales variables del estado de la pandemia y relacionar aspectos importantes de su vocación productiva y decisiones frente a la reactivación. Además, de consultar tres ejercicios de referenciación i) los principales socios estratégicos de los municipios según funcionalidades, ii) el top 10 de los municipios más parecidos a la entidad territorial en variable que podrían influir en el desarrollo de la pandemia ii) el top 10 de municipios más parecidos  a la entidad territorial según el estado actual de la pandemia. 
+                </p>  
+                <p> 
+                  A continuación,  los módulos a consultar : 
+                </p>  
+                <p> 
+                  Cualquier  inquietud metodológica puede dirigirse a <a href="mailto:terridata@dnp.gov.co">terridata@dnp.gov.co</a>.                
+
+                </p>
+
+              </div>
+
+              <div class="col-12 justify-content-center  text-center sectionBtn" style="padding-top: 20px;">
+
+              <a class="btn btnNav" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample2"  onclick="">
+                <div class="textBtn" >Conectividad por Funcionalidades</div>
+                
+                
+                </a>
+
+                <a class="btn btnNav" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample3"  onclick="">
+                  <div class="textBtn" >
+
+                    Estadísticas COVID-19 
+                  </div>
+                  
+                  </a>
+
+                  <a class="btn btnNav" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample4"  onclick="">
+                    
+                    <div class="textBtn" >Agrupamiento sociodemográfico </div>
+                    
+                    </a>
+          
+                    
+              <a class="btn btnNav" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4"  onclick="">
+                <div class="textBtn" >Agrupamiento COVID-19</div>
+                
+                
+                </a>
+
+                <a class="btn btnNav" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample4"  onclick="">
+                  <div class="textBtn" >Reactivación Económica</div>
+                  
+                  </a>
+                
+              </div>
+            
+
+
+         <!--
+              <div class="col-2" style="padding-top: 20px;"></div>
+            <div class="col-1" style="padding-top: 20px;">
+                <p>
+                    
+                    <a class="btn btnNav" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample2"  onclick="">
+                      Conectividad por Funcionalidades
+                      </a>
+                  </p>
+                </div>
+
+                <div class="col-1" style="padding-top: 20px;">
+                  <p>
+                    
+                    <a class="btn btnNav" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample3"  onclick="">
+                      Estadísticas COVID-19 
+                      </a>
+                  </p>
+                </div>
+
+                <div class="col-1" style="padding-top: 20px;">
+                  <p>
+                    
+                    <a class="btn btnNav" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample4"  onclick="">
+                      Agrupamiento sociodemográfico 
+                      </a>
+                  </p>
+            </div>   
+
+            <div class="col-1" style="padding-top: 20px;">
+              <p>
+                
+                <a class="btn btnNav" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4"  onclick="">
+                  Agrupamiento COVID-19
+                  </a>
+              </p>
+        </div>  
+
+        <div class="col-1" style="padding-top: 20px;">
+          <p>
+            
+            <a class="btn btnNav" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample4"  onclick="">
+              Reactivación Económica
+              </a>
+          </p>
+    </div>  
+
+    <div class="col-5" style="padding-top: 20px;"></div>
+    -->
+          
+
+        </div>    
+     
+
+        <div class="row justify-content-center "  id="collapseExample1" style="padding-top: 50px;">
+          <div class="col-4 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-4 text-center">
+                <h3>Funcionalidades en los municipios del país</h3>
+            </div>
+            <div class="col-4 text-right">
+              <div id="lineLeft"></div>
+            </div>
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px;">
+              
+
+                <div class="card " style=" float:left" aling="justify">   
+                    <p class="Descrip" >
+                      Las funcionalidades entre los municipios son las conexiones entre los municipios del país, entendiéndolas como el flujo de personas que: i) se movilizan por servicios de salud, ii)  se movilizan por servicios de educación, iii) conmutan por trabajo, y, iv) se movilizan por vía aérea. 
+                    </p>
+
+                    <p>
+                    La intensidad de estos flujos permite identificar los 10 socios más importantes de las entidades territoriales según cada temática enlistada anteriormente, y su agregación. Para ello seleccione el departamento, municipio, funcionalidad de interés  y elija el porcentaje de conexiones que desea ver. El mapa le permitirá visualizar los municipios con los que se tiene relación y su intensidad. La tabla le mostrará los municipios con el mayor número de conexiones para el municipio seleccionado.
+
+                    
+                    </p>
+
+                    
+                
+                </div>
+            </div>  
+            <div class="col-8 col-md-8 col-sm-8 col-lg-8 " style="padding-top: 100px; height: 950px;">
+              <div class="modal show-modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <img src="img/tenor.gif" width="100%" height="90%">
+                </div>
+              </div>
+            
+                  <fieldset style="padding-bottom: 24px;">
+                    <!--<label for="rangeVal">resolution (dpi):</label>-->
+                   
+                    <select id="Departamento-dropdown" name="Departamento">
+                    </select>
+            
+                    <select id="locality-dropdown" name="locality" disabled="true">
+                    </select>
+
+                    <select id="tipoViaje-dropdown" name="tipoViaje" >
+                      <option selected="true" value=0 disabled>Tipo de Viaje</option>
+                      <option value="Salud">Salud</option>
+                      <option value="Trabajo">Trabajo</option>
+                      <option value="Educacion">Educacion</option>
+                      <option value="Total">Viajes Totales por Funcionalidad</option>
+                      <option value="Vuelos">Datos de Vuelo</option>
+                      <option value="TTotal">Indice de Conectividad</option>
+                    </select>
+
+                    <div style="display: inline-block;">
+
+                    <input id="pconexion" type ="range" max="100" min="0"
+                        oninput="document.getElementById('rangeValLabel').innerHTML = this.value;"
+                        step="10" name="rangeVal" id="rangeVal" value="0">
+                    </input>
+
+                    <h4 style="display: inline;">
+                      <em id="rangeValLabel" style="font-style: normal;">0</em> %
+                    </h4>
+                  </div>
+                    <button id="graficar" type="button" class="btn btn-outline-success btn-lg btnGraf" disabled="true">Graficar</button>
+            
+                    <em id="Mostrando" style="font-style: normal;"></em>
+            
+                  </fieldset>
+            
+                  <div id="viewDiv" style="padding-bottom: 100px;"></div>
+            
+            
+                <span id="info" style="position:absolute; left:15px; bottom:5px; color:#000; z-index:50;"></span>
+            
+            
+              </div>  
+
+              <div class="col-8 col-md-8 col-sm-8 col-lg-8 "  id="tableDiv"  style="padding-top: 20px; padding-bottom:100px ;   display: none;">
+                <div id="showData">
+
+
+                </div>
+              
+              </div>
+
+              <div class="col-12 col-md-12 col-sm-12 col-lg-12 text-right"  id=""  style="padding-top: 50px; padding-bottom:30px ;">
+                <h7>Fuentes:</h7></br>
+                <h7>Matriz de subregiones funcionales. DNP. 2005</h7></br>
+                <h7>Vuelos Nacionales. Aerocivil. 2020</h7>
+              
+              </div>
+        </div>
+        
+
+        <div class="row justify-content-center" id="collapseExample2" style="padding-top: 20px;">
+          <div class="col-3 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-6 text-center">
+                <h3>Diagnóstico de COVID-19 en municipios del país</h3>
+            </div>
+            <div class="col-3 text-right">
+              <div id="lineLeft"></div>
+            </div>
+
+
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px; padding-bottom: 100px;">
+              
+                <div class="card " style=" float:left" aling="justify">   
+                    <p class="Descrip" >
+                       En este módulo puede consultar las principales variables que  caracterizan la presencia de la pandemia en los municipios del país, así como conocer su dinámica en el tiempo. 
+                    </p>
+
+                    <p class="Descrip" >
+                      A su vez, podrá identificar el estado de la pandemia del top 10 de municipios que se consideran sus socios estratégicos  con el propósito de sumar una visión supramunicipal sobre el manejo de la pandemia y la reactivación económica (ver tabla). 
+                    </p>                    
+                
+                </div>
+            </div>  
+            <div class="col-8" style="padding-top: 70;padding-bottom: 50px;">
+              <iframe width="100%" height="800px" src="https://app.powerbi.com/view?r=eyJrIjoiN2ZlY2Y5OTUtM2RhOC00NTY0LWJkNzAtMTg4YmIyYTBlYTJlIiwidCI6IjA0MjYwZTIwLTIzNGMtNGM5Zi1hOWRkLTc5Mjg2YjFiNzBhYyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>   
+            </div>
+
+            <div class="col-12 col-md-12 col-sm-12 col-lg-12 text-right"  id=""  style="padding-top: 5px; padding-bottom:30px ;">
+              <h7>Fuentes:</h7></br>
+              <h7>Casos positivos de COVID-19 en Colombia. Instituto Nacional de Salud. 2020</h7></br>
+              <h7>Colombia COVID19 Coronavirus Municipio. Esri Colombia. 2020</h7></br>
+              <h7>Colombia COVID19 Coronavirus casos diarios. Esri Colombia. 2020 </h7>            
+            </div>
+            
+        </div>
+
+        <div class="row justify-content-center" id="collapseExample3" style="padding-top: 20px;">
+          <div class="col-3 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-6 text-center">
+                <h3>Clasificación de municipios según características que favorecen la presencia del COVID-19</h3>
+            </div>
+            <div class="col-3 text-right">
+              <div id="lineLeft"></div>
+            </div>
+
+
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px; padding-bottom: 100px;">
+              
+
+                <div class="card " style=" float:left" aling="justify">   
+                    <p class="Descrip" >
+                      Aquí podrá identificar municipios similares* según atributos económicos y poblacionales que se consideran importantes en la dinámica de la Covid 19. 
+                    </p>
+
+                    <p class="Descrip" >
+                      La clasificación de los municipio se realizó en 5 grupos, de los cuales, se presentan los municipios más parecidos a cada entidad territorial dentro del grupo de clasificación. Esto le permitirá al municipio contrastar el estado de la pandemia en 10 municipios que se consideran pares para identificar presencia potencial de la pandemia (ver tabla). 
+                    </p>                    
+                
+                </div>
+            </div>  
+            <div class="col-8" style="padding-top: 70;padding-bottom: 50px;">
+              <iframe width="100%" height="800px" src="https://app.powerbi.com/view?r=eyJrIjoiOTFlYWJhOTktNmFmOS00MjdjLWIyYTMtMmMyMTM1MmFhZjE3IiwidCI6IjA0MjYwZTIwLTIzNGMtNGM5Zi1hOWRkLTc5Mjg2YjFiNzBhYyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>   
+            </div>
+
+            <div class="col-12 col-md-12 col-sm-12 col-lg-12 text-right"  id=""  style="padding-top: 5px; padding-bottom:30px ;">
+              <h7>Fuentes:</h7></br>
+              <h7>CENSO. DANE. 2018</h7></br>
+              <h7>Terridata . DNP. 2020</h7>
+            
+            </div>           
+
+            
+        </div>
+
+
+        <div class="row justify-content-center" id="collapseExample4" style="padding-top: 20px;">
+          <div class="col-3 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-6 text-center">
+                <h3>Clasificación de municipios según estado actual de COVID-19</h3>
+            </div>
+            <div class="col-3 text-right">
+              <div id="lineLeft"></div>
+            </div>
+
+
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px; padding-bottom: 100px;">
+              
+                <div class="card " style=" float:left" aling="justify">   
+                    <p class="Descrip" >
+                      Aquí podrá identificar municipios similares* según el estado actual de la pandemia. Estas son: los casos, el estado de los casos -asintomáticos, leve, moderado y grave- y momentos de la distribución de casos diarios.
+                    </p>
+                           
+                    <p class="Descrip" >
+                      La clasificación de los municipio se realizó en 5 grupos, de los cuales, se presentan los municipios más parecidos a cada entidad territorial dentro del grupo de clasificación. Esto le permitirá al municipio contrastar variables poblacionales de los 10 municipios que se consideran más parecidos en el estado de la pandemia (ver tabla) para identificar insumos en determinantes de la presencia de la pandemia.  
+                    </p>                    
+                
+                </div>
+            </div>  
+            <div class="col-8" style="padding-top: 70;padding-bottom: 50px;">
+              <iframe width="100%" height="800px" src="https://app.powerbi.com/view?r=eyJrIjoiZTk0MmZlZTgtZmNiYy00ZDY1LWJhZjItM2EyMmYxNGYzNGY1IiwidCI6IjA0MjYwZTIwLTIzNGMtNGM5Zi1hOWRkLTc5Mjg2YjFiNzBhYyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>   
+            </div>
+
+            <div class="col-12 col-md-12 col-sm-12 col-lg-12 text-right"  id=""  style="padding-top: 10px; padding-bottom:50px ;">
+              <h7>Fuentes:</h7></br>
+              <h7>Casos positivos de COVID-19 en Colombia. Instituto Nacional de Salud. 2020</h7></br>
+              <h7>Colombia COVID19 Coronavirus Municipio. Esri Colombia. 2020</h7></br>
+              <h7>Colombia COVID19 Coronavirus casos diarios. Esri Colombia. 2020 </h7>    
+            
+            </div>
+            
+        </div>
+
+        <div class="row justify-content-center" id="collapseExample5" style="padding-top: 20px;">
+          <div class="col-3 text-right">
+            <div id="lineRight"></div>
+          </div>
+          <div class="col-6 text-center">
+                <h3>Diagnóstico de los municipios para el manejo social y económico de la pandemia </h3>
+            </div>
+            <div class="col-3 text-right">
+              <div id="lineLeft"></div>
+            </div>
+
+            <div class="col-4 col-md-4 col-sm-4 col-lg-4 " style="padding-top: 20px; padding-bottom: 100px;">
+
+              <div class="card " style=" float:left; padding-top: 16px;" aling="justify">   
+                  
+                <p aling="justify">
+                  En este módulo puede consultar las principales variables que describen la trayectoria del empleo en el país y en el referente geográfico más cerca con información actualizada. 
+
+                </p>
+
+                <p>
+                  También podrá consultar con información que de cuenta de su vocación productiva, de la presencia de ocupados afiliados a ARL y de empresas.
+
+                </p>
+                <p>
+                  Recuerde revisar en el tablero: 
+
+                </p>
+
+                <p>
+                  La recuperación del volumen de empleados respecto a lo que ocurrió en 2019 por sectores. Esto le permitirá identificar qué sectores se están recuperando y a qué velocidad. 
+
+                </p>
+                <p>
+                  Para ello tenga en cuenta la actividad económica de su municipio, la presencia de las  ARL para acompañar orientaciones y las empresas y establecimientos a los que puede dirigir la política local.   
+
+                </p>
+                <p>
+                  Finalmente, podrá realizar el ejercicio de referenciación, considerando la situación económica de los municipios que se consideran socios estratégicos. Esto le permitirá alinear 
+
+                </p>
+
+              
+              </div>
+          </div>  
+
+          <div class="col-8" style="padding-top: 70;padding-bottom: 50px;">
+              <iframe width="100%" height="800px" src="https://app.powerbi.com/view?r=eyJrIjoiM2RjYzRlNWItZTYyOC00MTVkLWEyMzctZTBmNTA0MzNhOGRiIiwidCI6IjA0MjYwZTIwLTIzNGMtNGM5Zi1hOWRkLTc5Mjg2YjFiNzBhYyIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+                  
+          </div>
+
+          <div class="col-12 col-md-12 col-sm-12 col-lg-12 text-right"  id=""  style="padding-top: 10px; padding-bottom:50px ;">
+            <h7>Fuentes:</h7></br>
+            <h7>Ingreso Tributario y No Tributario. DNP. 2015</h7></br>
+            <h7>Estadísticas nacionales  . DANE. 2015</h7>
+          
+          </div>
+          
+      </div>
+
+
+        
+    </div>
+
+
+    <footer class="he_footer"> <!-- GOV FOOTER -->
+      <div class="container-fluid" style="margin-bottom: 0; margin-top: 0; background: transparent;">
+        <div class="row" style="background: transparent; box-shadow: none;">
+          <div class="col-lg-3 col-xl-2 split screen-lg logos">
+            <div class="logo">
+              <a href="https://www.gov.co">
+                <img src="img/header/logo_footer.png" alt="logo">
+              </a>
+            </div>
+            <div class="logo_co">
+              <a href="https://www.colombia.co">
+                <img src="img/header/logo_co_footer.png" alt="logo co">
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-5 col-xl-6 split">
+            <h4>Departamento Nacional de Planeación</h4>
+            <p>
+              Calle 26 # 13-19 - Edificio ENTerritorio / Bogotá D.C., Colombia<br>
+              Código Postal: 110311<br>
+              Horario de Atención: 8:00 a.m. - 4:30 p.m. jornada continua
+            </p>
+            <ul class="he_footer_redes">
+              <a href="https://twitter.com/DNP_Colombia">
+                <li>
+                  <i class="fa fa-twitter fa-circulo" aria-hidden="true"></i>
+                  <div class="fa_text">Twitter</div>
+                </li>
+              </a>
+              <a href="https://www.instagram.com/dnp_colombia/">
+                <li>
+                  <i class="fa fa-instagram fa-circulo" aria-hidden="true"></i>
+                  <div class="fa_text">Instagram</div>
+                </li>
+              </a>
+              <a href="https://www.facebook.com/departamentonacionaldeplaneacion/">
+                <li>
+                  <i class="fa fa-facebook fa-circulo" aria-hidden="true"></i>
+                  <div class="fa_text">Facebook</div>
+                </li>
+              </a>
+              <a href="https://www.linkedin.com/company/departamento-nacional-de-planeacion/">
+                <li>
+                  <i class="fa fa-linkedin fa-circulo" aria-hidden="true"></i>
+                  <div class="fa_text">LinkedIn</div>
+                </li>
+              </a>
+            </ul>
+          </div>
+          <div class="col-lg-4 no-split">
+            <h4><i class="fa fa-phone" aria-hidden="true"></i>Contacto</h4>
+            <p>
+              Teléfono Conmutador: +57 (1) 381 50 00<br>
+              Línea Gratuita: 01 8000 12 12 21<br>
+              Buzón de Servicio al Ciudadano: servicioalciudadano@dnp.gov.co<br>
+              Buzón de notificaciones DNP: notificacionesjudiciales@dnp.gov.co<br>
+              Buzón de asistencia: <br/>soportedddr@dnp.gov.co <br/>
+            </p>
+            <p style="margin-top: 8px;">
+              <a href="https://www.dnp.gov.co/Paginas/Pol%C3%ADtica-de-privacidad.aspx">Política de seguridad de la información</a>
+            </p>
+  
+            <p style="margin-top: 8px;">
+    
+              <a id="ctl00_IdWelcome_ExplicitLogin" class="ms-signInLink"
+                href="https://www.dnp.gov.co/DNPN/_layouts/15/Authenticate.aspx?Source=%2FDNPN%2FPaginas%2Fdefault%2Easpx"
+                style="display:inline-block;">Inicio de sesión</a>
+    
+            </p>
+  
+            <p style="margin-top: 8px;"><a href="https://outlook.office.com/owa" target="_blank">Correo Institucional</a></p>
+            <p style="margin-top: 8px;"><a href="https://micuentasrh.dnp.gov.co/webkactus/frmLogin.aspx" target="_blank">Mi Cuenta</a></p>
+    
+          </div>
+          <div class="col-lg-2 no-split split-top screen-md-sm logos_movil">
+            <div class="logo">
+              <a href="https://www.gov.co">
+                <img src="img/header/logo_footer.png" alt="logo">
+              </a>
+            </div>
+            <div class="logo_co">
+              <a href="https://www.colombia.co">
+                <img src="img/header/logo_co_footer.png" alt="logo co">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  </body>
+</html>
